@@ -13,6 +13,13 @@
       <a class="navbar-brand" href="{% url 'Home'%}">Awards</a>
     </div>
     <div class="col-sm-4 col-md-4 navbar-right">
+      {% if user.is_authenticated %}
+      <a class="navbar-brand" href="#">{{request.user}}</a>
+      <a class="navbar-brand" href="#">new project</a>
+      <a class="navbar-brand" href="/logout">logout</a>
+      {%else%}
+      <a class='navbar-brand' href="/accounts/login">Login</a>
+      {% endif%}
       <form  class="navbar-form" role="search"action="#">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search by title" name="title">
@@ -31,7 +38,8 @@
 .navbar-inverse{
   height: 100px;
   background-color: #4F0505;
-  padding-top: 50px;
+  /* padding-top: 50px; */
+  padding-bottom: 50px;
   margin-bottom: 0px;
   background-size: cover;
 }
