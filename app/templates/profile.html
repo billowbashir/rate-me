@@ -29,16 +29,15 @@
   {%if projects%}
 {%for project in projects%}
 
-<div style="color:#4F0505;background-color:#f4e7d7;margin:20px;"class="col-md-5">
-<h1><a style="color:#4F0505;" href="{{project.link}}">{{project.title}}</a></h1>
-<img src="{{project.project_image.url}}" alt="image of project">
-<!-- <p>.{{project.project_image.url}}</p> -->
+<div style="color:black;background-color:white;border-style:solid;border-color:#4F0505;margin:20px;"class="col-md-5">
+<h1><a  href="{{project.link}}">{{project.title}}</a></h1>
+<img src="{{project.project_image.url}}" style="height:200px">
 <h4>by {{project.owner.username}}</h4>
 <p>{{project.description}}</p>
 </div>
 {%endfor%}
 {%else%}
-<h2 style="color:white;">you seem to have no images</h2>
+<h2 style="color:white;">you seem to have no projects</h2>
 <button  class="btn btn-primary"><a style="color:white;"href="{%url 'new_project'%}">post project to be rated</a></button>
 {%endif%}
 
