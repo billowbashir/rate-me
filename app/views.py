@@ -41,3 +41,6 @@ def new_profile(request):
     else:
         profile_form = NewProfileForm()
     return render(request, 'new_profile.html', {"profile_form": profile_form,})
+# def rating(request):
+#     percentages={'design':10%,'usability':20%,'content':90%}
+#     return render (request,'rating.html',{'percentages':percentages,})
