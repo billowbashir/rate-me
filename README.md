@@ -4,18 +4,21 @@
 [bashir hassan](https://github.com/billowbashir/)
 
 ## description
-An application that mimics awwards where a user can post projects.Which are viewed and rated by others
+An application that mimics awwards where a user can post projects.Which are viewed and rated by others,A project can be rated based on 3 different criteria
+
+- Design
+- Usability
+- Content
 ## how it works
 a user can:
 - View posted projects and their details.
-- Post a project to be rated/reviewed
+- Post a project to be rated/reviewed on design,usability and content
 - Rate/ review other users' projects
 - Search for projects
 - View projects overall score
 - View my profile page.
 ## Installation requirements
 To run the application do the following:
-
 - clone this repo by running:
 ` git clone https://github.com/billowbashir/rate-me `
 - set up a virtual environment
