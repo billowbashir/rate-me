@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+
+
 
 
 class Project(models.Model):
@@ -18,3 +23,18 @@ class Profile(models.Model):
     @classmethod
     def search_by_profile(cls,search_term):
         profiles=cls.objects.filter(user__icontains=search_term)
+class Rate(models.Model):
+    project=models.ForeignKey(Project,on_delete=models.CASCADE)
+    rater=models.ForeignKey(User,on_delete=models.CASCADE)
+    design_rating = models.IntegerField(
+        default=0,
+        validators=[MaxValueValidator(100), MinValueValidator(1)]
+     )
+    usability_rating=models.IntegerField(
+        default=0,
+        validators=[MaxValueValidator(100), MinValueValidator(1)]
+     )
+    content_rating=models.IntegerField(
+        default=0,
+        validators=[MaxValueValidator(100), MinValueValidator(1)]
+     )

@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Project,Profile
-from .forms import NewProjectForm,NewProfileForm
+from .forms import NewProjectForm,NewProfileForm,RateForm
 
 
 @login_required(login_url='/accounts/login/')
@@ -41,6 +41,22 @@ def new_profile(request):
     else:
         profile_form = NewProfileForm()
     return render(request, 'new_profile.html', {"profile_form": profile_form,})
-# def rating(request):
-#     percentages={'design':10%,'usability':20%,'content':90%}
-#     return render (request,'rating.html',{'percentages':percentages,})
+def project_details(request,project_id):
+    project=Project.objects.filter(id=project_id)
+    return render (request,'project_details.html',{'project':project,})
+
+def rating(request,project_id):
+
+    current_user = request.user
+    if request.method == 'POST':
+        rate_form = RateForm(request.POST, request.FILES)
+        if rate_form.is_valid():
+            rate = rate_form.save(commit=False)
+            rate.rater = current_user
+
+            rate.save()
+        return redirect('Home')
+
+    else:
+        rate_form = RateForm()
+    return render (request,'rating.html',{'rate_form':rate_form,})
