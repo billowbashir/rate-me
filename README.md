@@ -43,8 +43,7 @@ To run the application do the following:
 - run the application locally with
  ` python manage.py runserver `
 ## Link to live site
-https://#.herokuapp.com
-
+https://bashir-rate-me.herokuapp.com
 ## likely bugs
 Currently the application has no known bugs but if you come across any issues feel free to contact me from the email address that will be provided below.
 ## Testing
