@@ -20,7 +20,7 @@
       {%else%}
       <a class='navbar-brand' href="/accounts/login">Login</a>
       {% endif%}
-      <form  class="navbar-form" role="search"action="#">
+      <form  class="navbar-form" role="search"action="{%url 'search_projects'%}">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Search by title" name="title">
             <div class="input-group-btn">
