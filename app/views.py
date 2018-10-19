@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Project,Profile
 from .forms import NewProjectForm,NewProfileForm,RateForm
@@ -41,22 +41,34 @@ def new_profile(request):
     else:
         profile_form = NewProfileForm()
     return render(request, 'new_profile.html', {"profile_form": profile_form,})
-def project_details(request,project_id):
-    project=Project.objects.filter(id=project_id)
-    return render (request,'project_details.html',{'project':project,})
 
-def rating(request,project_id):
+
+def review(request,rate_id):
 
     current_user = request.user
+    rate = get_object_or_404(Project,pk=rate_id)
     if request.method == 'POST':
         rate_form = RateForm(request.POST, request.FILES)
         if rate_form.is_valid():
-            rate = rate_form.save(commit=False)
-            rate.rater = current_user
-
+            rate = form.save(commit=False)
+            rate.project = rate
+            rate.user = current_user
             rate.save()
-        return redirect('Home')
+        return redirect('home')
+    return render(request, 'index.html',{"rate":rate})
 
-    else:
-        rate_form = RateForm()
-    return render (request,'rating.html',{'rate_form':rate_form,})
+# def rating(request,id):
+#
+#     current_user = request.user
+#     if request.method == 'POST':
+#         rate_form = RateForm(request.POST, request.FILES)
+#         if rate_form.is_valid():
+#             rate = rate_form.save(commit=False)
+#             rate.rater = current_user
+#
+#             rate.save()
+#         return redirect('Home')
+#
+#     else:
+#         rate_form = RateForm()
+#     return render (request,'rating.html',{'rate_form':rate_form,})
