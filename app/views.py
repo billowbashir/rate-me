@@ -7,7 +7,8 @@ from .forms import NewProjectForm,NewProfileForm,RateForm
 @login_required(login_url='/accounts/login/')
 def home(request):
     projects=Project.objects.all()
-    return render(request,'index.html',{'projects':projects})
+    rate_form = RateForm()
+    return render(request,'index.html',{'projects':projects,'rate_form':rate_form})
 @login_required(login_url='/accounts/login/')
 def new_project(request):
     current_user = request.user
@@ -43,19 +44,20 @@ def new_profile(request):
     return render(request, 'new_profile.html', {"profile_form": profile_form,})
 
 
-def review(request,rate_id):
+def rating(request,rate_id):
 
     current_user = request.user
-    rate = get_object_or_404(Project,pk=rate_id)
+    project = get_object_or_404(Project,pk=rate_id)
     if request.method == 'POST':
         rate_form = RateForm(request.POST, request.FILES)
         if rate_form.is_valid():
-            rate = form.save(commit=False)
-            rate.project = rate
-            rate.user = current_user
+            rate = rate_form.save(commit=False)
+            rate.project = project
+            rate.rater = current_user
             rate.save()
-        return redirect('home')
-    return render(request, 'index.html',{"rate":rate})
+        return redirect('Home')
+
+    return render(request, 'index.html')
 
 # def rating(request,id):
 #

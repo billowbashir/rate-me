@@ -16,9 +16,9 @@ class Project(models.Model):
 
 
     def average_rating(self):
-        all_ratings = list(map(lambda x: x.design_rating, self.review_set.all()))
-        all_ratings = list(map(lambda x: x.content_rating, self.review_set.all()))
-        all_ratings = list(map(lambda x: x.usability_rating, self.review_set.all()))
+        all_ratings = list(map(lambda x: x.design_rating, self.rate_set.all()))
+        all_ratings = list(map(lambda x: x.content_rating, self.rate_set.all()))
+        all_ratings = list(map(lambda x: x.usability_rating, self.rate_set.all()))
         return np.mean(all_ratings)
 
 
